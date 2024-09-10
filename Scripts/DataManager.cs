@@ -218,7 +218,7 @@ public class DataManager
         else
             studentTestGameData.data.testId = testId;
     }
-//HELLO
+
     
     #endregion
 }
