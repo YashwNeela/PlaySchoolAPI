@@ -37,7 +37,9 @@ public class PlayschoolEditorWindow : EditorWindow
     {
         CreditsImage();
         PlaySchoolAPI();
+
         SortingGameClone();
+        SortingGamePull();
         
     }
 
@@ -121,5 +123,26 @@ public class PlayschoolEditorWindow : EditorWindow
         process.WaitForExit();
         }
 
+    }
+    private string sortingPull_SH = System.IO.Path.GetDirectoryName(Application.dataPath) + "/Assets/PlaySchoolAPI/ShellScripts/SortingGame/SortingPull.sh";
+
+    void SortingGamePull()
+    {
+        EditorGUILayout.LabelField("Sorting Cline Path:", sortingPull_SH);
+
+        if (GUILayout.Button("Pull Sorting Game")){
+
+        string scriptssh = sortingPull_SH;
+        Process process= new Process();
+        process.StartInfo.FileName = "/bin/bash";
+        process.StartInfo.Arguments = $"\"{scriptssh}\"";
+        process.StartInfo.RedirectStandardOutput = true;
+        process.StartInfo.RedirectStandardError = true;
+        process.StartInfo.UseShellExecute = false;
+        process.Start();
+        string result = process.StandardOutput.ReadToEnd();
+        string error = process.StandardError.ReadToEnd();
+        process.WaitForExit();
+        }
     }
 }
