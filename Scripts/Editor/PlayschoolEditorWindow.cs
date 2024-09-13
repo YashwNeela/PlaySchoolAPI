@@ -100,7 +100,7 @@ public class PlayschoolEditorWindow : EditorWindow
             UnityEngine.Debug.Log("Command executed for platform.");
         }
     }
-    private string sortingClone_SH = System.IO.Path.GetDirectoryName(Application.dataPath) + "/PlaySchoolAPI/ShellScripts/SortingGame/SortingClone.sh";
+    private string sortingClone_SH = System.IO.Path.GetDirectoryName(Application.dataPath) + "/Assets/PlaySchoolAPI/ShellScripts/SortingGame/SortingClone.sh";
     void SortingGameClone()
     {
 
