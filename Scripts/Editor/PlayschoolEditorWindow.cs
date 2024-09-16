@@ -18,7 +18,7 @@ public class PlayschoolEditorWindow : EditorWindow
         GetWindow<PlayschoolEditorWindow>("Custom Window");
     }
 
-    
+
 
     // Create the GUI for the window
     private void OnEnable()
@@ -37,7 +37,6 @@ public class PlayschoolEditorWindow : EditorWindow
     {
         CreditsImage();
         PlaySchoolAPI();
-
         SortingGameClone();
     }
 
@@ -82,21 +81,21 @@ public class PlayschoolEditorWindow : EditorWindow
         if (GUILayout.Button("Pull PlayShool API"))
         {
             ProveYouAreSmartEditorWindow.ShowWindow();
-            
-        //     // Determine the platform and run the appropriate command
-        //     #if UNITY_EDITOR_WIN
-        //     // Windows
-        //     string gitCommand = "git submodule update --remote";
-        //     string fullCommand = $"/k cd /d \"{inputText}\" && {gitCommand}";
-        //     Process.Start("cmd.exe", fullCommand);
-        //     #elif UNITY_EDITOR_OSX
-        //     // macOS
-        //     string gitCommand = "git submodule update --remote";
-        //     string fullCommand = $"cd \"{inputText}\"; {gitCommand}";
-        //     string terminalCommand = $"/bin/zsh -c \"{fullCommand}\"";
-        //     Process.Start("open", $"-a Terminal \"{terminalCommand}\"");
-        //  //   Process.Start("open", "-a Terminal");
-        //     #endif
+
+            //     // Determine the platform and run the appropriate command
+            //     #if UNITY_EDITOR_WIN
+            //     // Windows
+            //     string gitCommand = "git submodule update --remote";
+            //     string fullCommand = $"/k cd /d \"{inputText}\" && {gitCommand}";
+            //     Process.Start("cmd.exe", fullCommand);
+            //     #elif UNITY_EDITOR_OSX
+            //     // macOS
+            //     string gitCommand = "git submodule update --remote";
+            //     string fullCommand = $"cd \"{inputText}\"; {gitCommand}";
+            //     string terminalCommand = $"/bin/zsh -c \"{fullCommand}\"";
+            //     Process.Start("open", $"-a Terminal \"{terminalCommand}\"");
+            //  //   Process.Start("open", "-a Terminal");
+            //     #endif
 
             UnityEngine.Debug.Log("Command executed for platform.");
         }
@@ -104,103 +103,78 @@ public class PlayschoolEditorWindow : EditorWindow
 
     public static void PullPlaySchoolAPI()
     {
-            // Determine the platform and run the appropriate command
-            #if UNITY_EDITOR_WIN
+        // Determine the platform and run the appropriate command
+#if UNITY_EDITOR_WIN
             // Windows
             string gitCommand = "git submodule update --remote";
             string fullCommand = $"/k cd /d \"{inputText}\" && {gitCommand}";
             Process.Start("cmd.exe", fullCommand);
-            #elif UNITY_EDITOR_OSX
-            // macOS
-            string gitCommand = "git submodule update --remote";
-            string fullCommand = $"cd \"{inputText}\"; {gitCommand}";
-            string terminalCommand = $"/bin/zsh -c \"{fullCommand}\"";
-            Process.Start("open", $"-a Terminal \"{terminalCommand}\"");
-         //   Process.Start("open", "-a Terminal");
-            #endif
+#elif UNITY_EDITOR_OSX
+        // macOS
+        string gitCommand = "git submodule update --remote";
+        string fullCommand = $"cd \"{inputText}\"; {gitCommand}";
+        string terminalCommand = $"/bin/zsh -c \"{fullCommand}\"";
+        Process.Start("open", $"-a Terminal \"{terminalCommand}\"");
+        //   Process.Start("open", "-a Terminal");
+#endif
     }
-    private string sortingClone_SH = System.IO.Path.GetDirectoryName(Application.dataPath) + "/Assets/PlaySchoolAPI/ShellScripts/SortingGame/SortingClone.sh";
-    private string sortingPull_SH = System.IO.Path.GetDirectoryName(Application.dataPath) + "/Assets/PlaySchoolAPI/ShellScripts/SortingGame/SortingPull.sh";
 
-    private string spotTheDiffClone_SH = System.IO.Path.GetDirectoryName(Application.dataPath) + "/Assets/PlaySchoolAPI/ShellScripts/SpotTheDiff/SpotDifferenceClone.sh";
-    private string spotTheDiffPull_SH = System.IO.Path.GetDirectoryName(Application.dataPath) + "/Assets/PlaySchoolAPI/ShellScripts/SpotTheDiff/SpotDifferencePull.sh";
-    private Vector2 scrollPosition = new Vector2(1000,10);
+
+
+    private Vector2 scrollPosition = new Vector2(1000, 10);
 
     void SortingGameClone()
     {
-    // Start the outer horizontal layout
-    EditorGUILayout.BeginHorizontal();
-
-    // Scroll view on the left (for buttons)
-    scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.ExpandWidth(true), GUILayout.Height(position.height));
-
-    // First column for buttons inside the scroll view
-    EditorGUILayout.BeginVertical(GUILayout.ExpandWidth(true)); // Automatically adjusts to window size
-
-    EditorGUILayout.BeginHorizontal();
-    if (GUILayout.Button(new GUIContent("Clone Sorting Game", sortingClone_SH), GUILayout.ExpandWidth(true)))
-    {
-        RunSSH(sortingClone_SH);
-
-        // string scriptssh = sortingClone_SH;
-        // Process process = new Process();
-        // process.StartInfo.FileName = "/bin/bash";
-        // process.StartInfo.Arguments = $"\"{scriptssh}\"";
-        // process.StartInfo.RedirectStandardOutput = true;
-        // process.StartInfo.RedirectStandardError = true;
-        // process.StartInfo.UseShellExecute = false;
-        // process.Start();
-        // string result = process.StandardOutput.ReadToEnd();
-        // string error = process.StandardError.ReadToEnd();
-        // process.WaitForExit();
-    }
-
-    if (GUILayout.Button(new GUIContent("Pull Sorting Game", sortingPull_SH), GUILayout.ExpandWidth(true)))
-    {
-        RunSSH(sortingPull_SH);
-        // string scriptssh = sortingPull_SH;
-        // Process process = new Process();
-        // process.StartInfo.FileName = "/bin/bash";
-        // process.StartInfo.Arguments = $"\"{scriptssh}\"";
-        // process.StartInfo.RedirectStandardOutput = true;
-        // process.StartInfo.RedirectStandardError = true;
-        // process.StartInfo.UseShellExecute = false;
-        // process.Start();
-        // string result = process.StandardOutput.ReadToEnd();
-        // string error = process.StandardError.ReadToEnd();
-        // process.WaitForExit();
-    }
-    EditorGUILayout.EndHorizontal();
-
-    // Add all your "AD" buttons in the scroll view
+        // Start the outer horizontal layout
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button(new GUIContent("Clone SpotTheDiff Game", spotTheDiffClone_SH), GUILayout.ExpandWidth(true))) 
+
+        // Scroll view on the left (for buttons)
+        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.ExpandWidth(true), GUILayout.Height(position.height));
+
+        // First column for buttons inside the scroll view
+        EditorGUILayout.BeginVertical(GUILayout.ExpandWidth(true)); // Automatically adjusts to window size
+
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button(new GUIContent("Clone Sorting Game", GameSSHPath.sortingClone_SH), GUILayout.ExpandWidth(true)))
         {
-                RunSSH(spotTheDiffClone_SH);
+            RunSSH(GameSSHPath.sortingClone_SH);
+        }
 
-
-         }
-        if (GUILayout.Button(new GUIContent("Pull SpotTheDiff Game", spotTheDiffPull_SH), GUILayout.ExpandWidth(true))) 
+        if (GUILayout.Button(new GUIContent("Pull Sorting Game", GameSSHPath.sortingPull_SH), GUILayout.ExpandWidth(true)))
         {
-                RunSSH(spotTheDiffPull_SH);
+            RunSSH(GameSSHPath.sortingPull_SH);
+        }
+        EditorGUILayout.EndHorizontal();
+
+        // Add all your "AD" buttons in the scroll view
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button(new GUIContent("Clone SpotTheDiff Game", GameSSHPath.spotTheDiffClone_SH), GUILayout.ExpandWidth(true)))
+        {
+            RunSSH(GameSSHPath.spotTheDiffClone_SH);
 
 
-         }
+        }
+        if (GUILayout.Button(new GUIContent("Pull SpotTheDiff Game", GameSSHPath.spotTheDiffPull_SH), GUILayout.ExpandWidth(true)))
+        {
+            RunSSH(GameSSHPath.spotTheDiffPull_SH);
+
+
+        }
         EditorGUILayout.EndHorizontal();
 
 
-    EditorGUILayout.EndVertical();
+        EditorGUILayout.EndVertical();
 
-    // End the scroll view
-    EditorGUILayout.EndScrollView();
+        // End the scroll view
+        EditorGUILayout.EndScrollView();
 
-    // End the outer horizontal layout
-    EditorGUILayout.EndHorizontal();
-}
+        // End the outer horizontal layout
+        EditorGUILayout.EndHorizontal();
+    }
 
-private void RunSSH(string ssh)
-{
-    string scriptssh = ssh;
+    private void RunSSH(string ssh)
+    {
+        string scriptssh = ssh;
         Process process = new Process();
         process.StartInfo.FileName = "/bin/bash";
         process.StartInfo.Arguments = $"\"{scriptssh}\"";
@@ -211,6 +185,6 @@ private void RunSSH(string ssh)
         string result = process.StandardOutput.ReadToEnd();
         string error = process.StandardError.ReadToEnd();
         process.WaitForExit();
-}
+    }
 
 }
