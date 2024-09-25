@@ -41,7 +41,7 @@ public static string AuthorizationToken = "authorizationToken";
     #region Get Data
     // public static string GetAuthToken = PlayerPrefs.GetString(AuthorizationToken);
     public static int totalStudents = PlayerPrefs.GetInt("totalStudents");
-    public static string currentStudentPlaying = "currentStudent";
+    public static string currentStudentName = "currentStudent";
     public static string saveDateTime = "saveDateTime";
     public static string LastAttendanceKey = "LastAttendanceDate";
     public static string LastReportCardKey = "LastReportCardKey";
