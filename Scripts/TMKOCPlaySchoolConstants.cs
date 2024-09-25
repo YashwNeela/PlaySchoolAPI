@@ -42,6 +42,8 @@ public static string AuthorizationToken = "authorizationToken";
     // public static string GetAuthToken = PlayerPrefs.GetString(AuthorizationToken);
     public static int totalStudents = PlayerPrefs.GetInt("totalStudents");
     public static string currentStudentName = "currentStudent";
+    public static string currentStudentPlaying = "currentStudent";
+    
     public static string saveDateTime = "saveDateTime";
     public static string LastAttendanceKey = "LastAttendanceDate";
     public static string LastReportCardKey = "LastReportCardKey";
