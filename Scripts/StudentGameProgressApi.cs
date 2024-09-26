@@ -25,18 +25,26 @@ public class StudentGameProgressApi : MonoBehaviour
 
     private void Awake()
     {
-
-
         if (Instance == null)
         {
 
             Instance = this;
-            DontDestroyOnLoad(this);
+            //  DontDestroyOnLoad(this);
         }
         else
         {
             Destroy(this.gameObject);
         }
+#if PLAYSCHOOL_MAIN
+        GetAuth = PlayerPrefs.GetString(TMKOCPlaySchoolConstants.AuthorizationToken);
+        OnStudentAPIInitialized?.Invoke();
+        isInitialized = true;
+#else
+        GetAuth = TMKOCPlaySchoolConstants.AuthorizationToken;
+        OnStudentAPIInitialized?.Invoke();
+        isInitialized = true;
+
+#endif
     }
     void Start()
     {
@@ -58,17 +66,6 @@ public class StudentGameProgressApi : MonoBehaviour
         //    AddStudentIsPlayingLevel("TestName", gameId);
         //}
         //StartCoroutine(AddStudentAttendance("TestName2" , true));
-
-#if PLAYSCHOOL_MAIN
-        GetAuth = PlayerPrefs.GetString(TMKOCPlaySchoolConstants.AuthorizationToken);
-        OnStudentAPIInitialized?.Invoke();
-        isInitialized = true;
-#else
-        GetAuth = TMKOCPlaySchoolConstants.AuthorizationToken;
-        OnStudentAPIInitialized?.Invoke();
-        isInitialized = true;
-
-#endif
     }
     public void SetGameData(StudentGameData data)
     {
@@ -284,7 +281,8 @@ public class StudentGameProgressApi : MonoBehaviour
                 if (studentTestGameData.status)
                 {
                     SetGameTestData(studentTestGameData);
-                }else
+                }
+                else
                 {
                     CurrentGameData = new StudentGameData();
                     CurrentGameData.data = new StudentGameData.Data();
