@@ -1,4 +1,6 @@
+using System;
 using System.Diagnostics;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -111,12 +113,37 @@ public class PlayschoolEditorWindow : EditorWindow
             Process.Start("cmd.exe", fullCommand);
 #elif UNITY_EDITOR_OSX
         // macOS
-        string gitCommand = "git submodule update --remote";
-        string fullCommand = $"cd \"{inputText}\"; {gitCommand}";
-        string terminalCommand = $"/bin/zsh -c \"{fullCommand}\"";
-        Process.Start("open", $"-a Terminal \"{terminalCommand}\"");
+         string gitCommand = "git submodule update --remote";
+        // string fullCommand = $"cd \"{inputText}\"; {gitCommand}";
+        // string terminalCommand = $"/bin/zsh -c \"{fullCommand}\"";
+        // Process.Start("open", $"-a Terminal \"{inputText}\" && {gitCommand}");
+        WriteToFile(inputText+"/Assets/PlaySchoolAPI/ShellScripts/PlaySchoolAPI/PlaySchoolAPI.sh",gitCommand,()=>
+        {
+            RunSSH(inputText+"/Assets/PlaySchoolAPI/ShellScripts/PlaySchoolAPI/PlaySchoolAPI.sh");
+        });
+
         //   Process.Start("open", "-a Terminal");
 #endif
+    }
+
+    static void WriteToFile(string path, string content, Action callback)
+    {
+        try
+        {
+            // Create or open the file, write to it, and ensure content is flushed and saved
+            using (StreamWriter writer = new StreamWriter(path, false))
+            {
+                writer.Write(content);
+                writer.Flush();  // Ensure the content is written to the file
+            }
+            UnityEngine.Debug.Log($"File written and saved successfully at {path}");
+            callback?.Invoke();
+        }
+        catch (System.Exception ex)
+        {
+          UnityEngine.Debug.LogError($"Failed to write and save the file: {ex.Message}");
+        }
+
     }
 
 
@@ -172,7 +199,7 @@ public class PlayschoolEditorWindow : EditorWindow
         EditorGUILayout.EndHorizontal();
     }
 
-    private void RunSSH(string ssh)
+    private static void RunSSH(string ssh)
     {
         string scriptssh = ssh;
         Process process = new Process();
