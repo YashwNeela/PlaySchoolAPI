@@ -205,7 +205,7 @@ public class PlayschoolEditorWindow : EditorWindow
     {
         string scriptssh = ssh;
         Process process = new Process();
-        #if UNITY_EDITOR_WIN
+        #if UNITY_EDITOR_OSX 
         process.StartInfo.FileName = "/bin/bash";
         process.StartInfo.Arguments = $"\"{scriptssh}\"";
         process.StartInfo.RedirectStandardOutput = true;
@@ -215,7 +215,7 @@ public class PlayschoolEditorWindow : EditorWindow
         string result = process.StandardOutput.ReadToEnd();
         string error = process.StandardError.ReadToEnd();
         process.WaitForExit();
-        #elif UNITY_EDITOR_OSX
+        #elif UNITY_EDITOR_WIN
         process.StartInfo.FileName = "C:\\Program Files\\Git\\bin\\sh.exe";
         process.StartInfo.Arguments = $"\"{scriptssh}\"";
         process.StartInfo.RedirectStandardOutput = true;
