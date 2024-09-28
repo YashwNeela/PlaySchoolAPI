@@ -12,7 +12,6 @@ public class ComparingEditorWindow : EditorWindow
     private string imageName1; // Name of the first random image
     private string imageName2; // Name of the second random image
 
-    [MenuItem("PlaySchool/Who is smart")]
     public static void ShowWindow()
     {
         // Create the editor window with a title
