@@ -7,7 +7,6 @@ public class ProveYouAreSmartEditorWindow : EditorWindow
 {
     private Texture2D image; // Texture for the image
 
-    [MenuItem("PlaySchool/Prove You are smart")]
     public static void ShowWindow()
     {
          // Create the editor window with a title
