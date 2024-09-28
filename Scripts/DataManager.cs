@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//SONU BYE BYE!!
 public class DataManager
 {
     StudentGameData studentGameData;
