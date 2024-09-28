@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//TUmse
+//TUmse apna
 public class DataManager
 {
     StudentGameData studentGameData;
