@@ -152,6 +152,7 @@ public class PlayschoolEditorWindow : EditorWindow
 
     void SortingGameClone()
     {
+        #if PLAYSCHOOL_MAIN
         // Start the outer horizontal layout
         EditorGUILayout.BeginHorizontal();
 
@@ -197,12 +198,14 @@ public class PlayschoolEditorWindow : EditorWindow
 
         // End the outer horizontal layout
         EditorGUILayout.EndHorizontal();
+        #endif
     }
 
     private static void RunSSH(string ssh)
     {
         string scriptssh = ssh;
         Process process = new Process();
+        #if UNITY_EDITOR_WIN
         process.StartInfo.FileName = "/bin/bash";
         process.StartInfo.Arguments = $"\"{scriptssh}\"";
         process.StartInfo.RedirectStandardOutput = true;
@@ -212,6 +215,18 @@ public class PlayschoolEditorWindow : EditorWindow
         string result = process.StandardOutput.ReadToEnd();
         string error = process.StandardError.ReadToEnd();
         process.WaitForExit();
+        #elif UNITY_EDITOR_OSX
+        process.StartInfo.FileName = "C:\\Program Files\\Git\\bin\\sh.exe";
+        process.StartInfo.Arguments = $"\"{scriptssh}\"";
+        process.StartInfo.RedirectStandardOutput = true;
+        process.StartInfo.RedirectStandardError = true;
+        process.StartInfo.UseShellExecute = false;
+        process.Start();
+        string result = process.StandardOutput.ReadToEnd();
+        string error = process.StandardError.ReadToEnd();
+        process.WaitForExit();
+
+        #endif
     }
 
 }
