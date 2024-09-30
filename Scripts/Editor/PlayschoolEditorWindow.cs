@@ -190,6 +190,22 @@ public class PlayschoolEditorWindow : EditorWindow
         }
         EditorGUILayout.EndHorizontal();
 
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button(new GUIContent("Clone Word Game", GameSSHPath.wordGameClone_SH), GUILayout.ExpandWidth(true)))
+        {
+            RunSSH(GameSSHPath.spotTheDiffClone_SH);
+
+
+        }
+        if (GUILayout.Button(new GUIContent("Pull Word Game", GameSSHPath.wordGamePull_SH), GUILayout.ExpandWidth(true)))
+        {
+            RunSSH(GameSSHPath.spotTheDiffPull_SH);
+
+
+        }
+        EditorGUILayout.EndHorizontal();
+
+
 
         EditorGUILayout.EndVertical();
 
