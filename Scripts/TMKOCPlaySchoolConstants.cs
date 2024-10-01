@@ -41,7 +41,13 @@ public static string AuthorizationToken = "authorizationToken";
     #region Get Data
     // public static string GetAuthToken = PlayerPrefs.GetString(AuthorizationToken);
     public static int totalStudents = PlayerPrefs.GetInt("totalStudents");
+#if PLAYSCHOOL_MAIN
     public static string currentStudentName = "currentStudent";
+#else
+    public static string currentStudentName = "TestName";
+#endif
+    
+    
     public static string currentStudentPlaying = "currentStudent";
     
     public static string saveDateTime = "saveDateTime";
