@@ -284,8 +284,10 @@ public class StudentGameProgressApi : MonoBehaviour
                 }
                 else
                 {
-                    CurrentGameData = new StudentGameData();
-                    CurrentGameData.data = new StudentGameData.Data();
+                    CurrentGameTestData = new StudentTestGameData();
+                     CurrentGameTestData.data = new StudentTestGameData.Data();
+
+
                 }
 
                 callback?.Invoke();
