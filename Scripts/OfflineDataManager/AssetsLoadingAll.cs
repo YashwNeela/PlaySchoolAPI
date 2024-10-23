@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-Serializable]
+[Serializable]
 public class AssetManyLoader{
 
   public Button[] bundleButtonClick;
