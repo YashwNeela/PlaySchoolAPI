@@ -7,10 +7,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-[Serializable]
+Serializable]
 public class AssetManyLoader{
 
- public string[] bundleName;
   public Button[] bundleButtonClick;
 }
 public class AssetsLoadingAll : MonoBehaviour
@@ -19,6 +18,9 @@ public class AssetsLoadingAll : MonoBehaviour
    public static AssetsLoadingAll instance;
         private AssetBundle assetBundle;
         private AsyncOperation asyncOperation;
+
+       // public int sceneIndex;
+        public string bundleName;
 
 
     public AssetManyLoader _assetMany;
@@ -38,16 +40,16 @@ public class AssetsLoadingAll : MonoBehaviour
 
         private void Start() {
             
-            for(int i = 0 ; i < _assetMany.bundleName.Length; i++)
+            for(int i = 0 ; i < _assetMany.bundleButtonClick.Length; i++)
             {
                 int index = i;
-                _assetMany.bundleButtonClick[index].onClick.AddListener(()=> LoadGameScene(_assetMany.bundleName[index]) );
+                _assetMany.bundleButtonClick[index].onClick.AddListener(()=> LoadGameScene(index) );
             }
         }
 
-        public void LoadGameScene(string bundleName)
+        public void LoadGameScene(int _sceneIndex)
         {
-            StartCoroutine(LoadSceneFromBundle(bundleName));
+            StartCoroutine(LoadSceneFromBundle(_sceneIndex));
             //LoadSceneFromBundle(bundleName);
         }
 
@@ -66,7 +68,7 @@ public class AssetsLoadingAll : MonoBehaviour
         }
    
 
-        private IEnumerator LoadSceneFromBundle(string bundleName)
+        private IEnumerator LoadSceneFromBundle(int sceneIndex)
         {
             AssetBundle.UnloadAllAssetBundles(true);
       
@@ -80,10 +82,15 @@ public class AssetsLoadingAll : MonoBehaviour
 
             assetBundle = assetBundleCreateRequest.assetBundle;
             string[] scenePaths = assetBundle.GetAllScenePaths();
+            // for(  int i = 0 ; i< scenePaths.Length ; i++)
+            // {
+
+            // Debug.Log("dakjhc " + scenePaths[i]);
+            // }
             if (scenePaths.Length > 0)
             {
                 //asyncOperation = SceneManager.LoadSceneAsync(scenePaths[0]);
-                asyncOperation = SceneManager.LoadSceneAsync(scenePaths[0]);
+                asyncOperation = SceneManager.LoadSceneAsync(scenePaths[sceneIndex]);
                 while (!asyncOperation.isDone)
                 {
                     //   progress = Mathf.MoveTowards(progress, assetBundleCreateRequest.progress, Time.deltaTime);
@@ -110,3 +117,4 @@ public class AssetsLoadingAll : MonoBehaviour
         
         
          }
+
